@@ -15,10 +15,6 @@ module.exports = router;
 
 
 
-// // ROUTE FOR TESTING MIDDLEWARE ROUTES AND AUTHENTICATION
-// router.post('/test', function (req, res) {
-//     res.json({ requestBody: req.body });
-// });
 
 
 
@@ -56,3 +52,8 @@ module.exports = router;
 //     return res.json(req.user);
 //   }
 // );
+
+// // ROUTE FOR TESTING MIDDLEWARE ROUTES AND AUTHENTICATION
+// router.post('/test', function (req, res) {
+//     res.json({ requestBody: req.body });
+// });
