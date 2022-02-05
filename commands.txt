@@ -1,0 +1,31 @@
+npx sequelize model:generate --name User --attributes username:string,email:string,hashedPassword:string
+npx dotenv sequelize db:migrate
+
+Undo migration
+npx dotenv sequelize db:migrate:undo
+
+After you migrate the Users table with the database-level constraints, 
+you need to add Sequelize model-level constraints.
+In your User model file, backend/db/models/user.js, add the following constraints:
+
+column name	data type	constraints
+username	string	not null, unique, min 4 characters, max 30 characters, isNotEmail
+email	string	not null, unique, min 3 characters, max 256 characters, isEmail
+hashedPassword	binary string	not null, min and max 60 characters
+
+
+npx sequelize seed:generate --name demo-user
+
+npx dotenv sequelize db:seed:all
+npx dotenv sequelize db:seed:undo
+npx dotenv sequelize db:seed:undo:all
+
+
+
+
+
+Frontend
+
+npx create-react-app . --template @appacademy/react-redux-v17 --use-npm
+
+npm install js-cookie
