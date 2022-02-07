@@ -17,7 +17,12 @@ function Navigation({ isLoaded }){
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <ProfileButton user={sessionUser} />
+      <>
+        <ProfileButton user={sessionUser} />
+        {/* {console.log(sessionUser)} */}
+        <p className="user-greeting">Hello, {sessionUser.username} </p>
+      </>
+      
     );
   } else {
     sessionLinks = (
