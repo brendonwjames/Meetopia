@@ -20,6 +20,22 @@ npx dotenv sequelize db:seed:all
 npx dotenv sequelize db:seed:undo
 npx dotenv sequelize db:seed:undo:all
 
+event table
+npx sequelize model:generate --name Event --attributes hostId:integer,categoryId:integer,eventName:string,image:string,date:date,capacity:integer
+npx dotenv sequelize db:migrate
+
+npx sequelize seed:generate --name eventsSeed
+npx dotenv sequelize db:seed:all
+
+rsvps table
+npx sequelize model:generate --name Rsvp --attributes eventId:integer,userId:integer
+npx dotenv sequelize db:migrate
+npx sequelize seed:generate --name rsvpsSeed
+npx dotenv sequelize db:seed:all
+
+
+
+
 
 
 
@@ -29,3 +45,11 @@ Frontend
 npx create-react-app . --template @appacademy/react-redux-v17 --use-npm
 
 npm install js-cookie
+
+
+Pushing and seeding on Heroku
+
+git push heroku main:master
+
+heroku run npm run sequelize db:migrate
+heroku run npm run sequelize db:seed:all
