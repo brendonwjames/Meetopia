@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   Event.associate = function(models) {
     // associations can be defined here
     Event.belongsTo(models.User, { foreignKey: "hostId" })
+    Event.hasMany(models.Rsvp, { foreignKey: "eventId", onDelete: "CASCADE", hooks: true })
   };
   return Event;
 };
