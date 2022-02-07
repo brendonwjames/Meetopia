@@ -20,6 +20,7 @@ function Navigation({ isLoaded }){
       <>
         <ProfileButton user={sessionUser} />
         {/* {console.log(sessionUser)} */}
+        
         <p className="user-greeting">Hello, {sessionUser.username} </p>
       </>
       
