@@ -11,7 +11,6 @@ module.exports = {
       hostId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        unique: true,
         references: { model: "Users" }
       },
       categoryId: {
@@ -24,7 +23,6 @@ module.exports = {
       },
       image: {
         type: Sequelize.STRING,
-        allowNull: false
       },
       date: {
         allowNull: false,

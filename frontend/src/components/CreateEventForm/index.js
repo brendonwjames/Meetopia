@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createEvent } from '../../store/events';
 import { Link, useHistory } from "react-router-dom"
+import * as SessionActions from '../../store/session'
 
 const CreateEventForm = () => {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const CreateEventForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const event = { hostId, categoryId, eventName, date, capacity }
-
+        console.log(event)
         let newEvent = await dispatch(createEvent(event))
 
         if (newEvent) {
@@ -30,9 +31,6 @@ const CreateEventForm = () => {
             reset();
         }
     }
-
-
-
 
     return (
         <div className='event-form-container'>
@@ -69,7 +67,7 @@ const CreateEventForm = () => {
                     />
                 </label>
                 <button type='submit'>Submit</button>
-                <Link to='/events' className='cancel-event-button'>Cancel</Link>
+                <Link to='/' className='cancel-event-button'>Cancel</Link>
             </form>
         </div>
     )

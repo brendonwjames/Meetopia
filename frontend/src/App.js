@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import CreateEventForm from "./components/CreateEventForm";
+import EventListPage from "./components/EventListPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
