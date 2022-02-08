@@ -23,7 +23,7 @@ const CreateEventForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const event = { hostId, categoryId, eventName, date, capacity }
-        console.log(event)
+        // console.log(event)
         let newEvent = await dispatch(createEvent(event))
 
         if (newEvent) {
