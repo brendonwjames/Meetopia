@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
+import { editEvent } from '../../store/events';
 
 
 const EditEventPage = () => {
@@ -42,7 +43,7 @@ const EditEventPage = () => {
         e.preventDefault();
 
         const payload = { id: event.id, hostId, categoryId, eventName, date, capacity };
-        let updateEvent = await dispatch(payload);
+        let updateEvent = await dispatch(editEvent(payload));
 
         if (updateEvent) {
             history.push('/events');
