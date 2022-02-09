@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { editEvent } from '../../store/events'
 import { Link, useHistory, useParams } from 'react-router-dom';
 
 
@@ -9,37 +8,53 @@ const EditEventPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     let { eventId } = useParams();
-    console.log(eventId, '11')
 
     eventId = parseInt(eventId);
     console.log(eventId, '22')
 
-    const eventsObj = useSelector(state => state.events)
-    console.log(eventsObj, '*****')
-    // const event = eventsObj.find(event => event.id === eventId)
+    const eventsObj = useSelector(state => Object.values(state.events))
+    console.log(eventsObj, '*****', eventId)
+    const event = eventsObj.find(event => event.id === eventId);
+    console.log(event)
 
     const hostId = useSelector(state => state.session.user.id);
+    console.log(hostId, "boooooobooooo")
 
-    // const [eventName, setEventName] = useState(event?.eventName);
-    // const [date, setDate] = useState(event?.date);
-    // const [capacity, setCapacity] = useState(event?.capacity);
+    const [eventName, setEventName] = useState(event?.eventName);
+    const [date, setDate] = useState(event?.date);
+    const [capacity, setCapacity] = useState(event?.capacity);
+    const [categoryId, setCategoryId] = useState(event?.categoryId)
 
-    // useEffect(()=> {
-    //     setEventName(event?.eventName)
-    //     setDate(event?.date)
-    //     setCapacity(event?.capacity)
-    // }, [event])
+    useEffect(()=> {
+        setEventName(event?.eventName);
+        setDate(event?.date);
+        setCapacity(event?.capacity);
+        setCategoryId(event?.categoryId);
+    }, [event])
 
-    // const reset = () => {
-    //     setEventName("");
-    //     setDate(new Date());
-    //     setCapacity(0);
-    // }
+    const reset = () => {
+        setEventName("");
+        setDate(new Date());
+        setCapacity(0);
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const payload = { id: event.id, hostId, categoryId, eventName, date, capacity };
+        let updateEvent = await dispatch(payload);
+
+        if (updateEvent) {
+            history.push('/events');
+            reset();
+        }
+    }
 
     return (
         <div className='event-form-container'>
             <form
                 className='event-form'
+                onSubmit={handleSubmit}
             >
                 <div>Edit</div>
                 <label>
@@ -47,6 +62,8 @@ const EditEventPage = () => {
                     <input
                         type="text"
                         name="name"
+                        value={eventName}
+                        onChange={(e) => setEventName(e.target.value)}
                     />
                 </label>
                 <label>
@@ -54,6 +71,8 @@ const EditEventPage = () => {
                     <input
                         type='date'
                         name='date'
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
                     />
                 </label>
                 <label>
@@ -61,15 +80,17 @@ const EditEventPage = () => {
                     <input
                         type="number"
                         name="capacity"
+                        value={capacity}
+                        onChange={(e) => setCapacity(e.target.value)}
                     />
                 </label>
-                <div className='event-form-buttons-section'>
+                <div className='event-form-buttons'>
                     <button
                         type="submit"
                     >
-                        Save Changes
+                        Confirm
                     </button>
-                    <Link to='/events' className='cancel-event-button'>Cancel</Link>
+                    <Link to='/events/' className='cancel-event-button'>Cancel</Link>
                 </div>
             </form>
         </div>
