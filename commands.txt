@@ -21,6 +21,7 @@ npx dotenv sequelize db:seed:undo
 npx dotenv sequelize db:seed:undo:all
 
 event table
+*********have not implemented images yet!!!!**************
 npx sequelize model:generate --name Event --attributes hostId:integer,categoryId:integer,eventName:string,image:string,date:date,capacity:integer
 npx dotenv sequelize db:migrate
 

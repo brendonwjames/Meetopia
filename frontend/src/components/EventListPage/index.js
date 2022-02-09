@@ -18,9 +18,11 @@ const EventListPage = () => {
 
     return(
         <>
-            <div>Seeing this</div>
             {events.map((event) => (
-                <div key={`${event.id}`}>{event.eventName}</div>
+                <div className='event-container'  key={`${event.id}`}>
+                    <div>{event.eventName}</div>
+                    <p>Capacity = {`${event.capacity}`}</p>
+                </div>
             ))}
         </>
         

@@ -19,7 +19,6 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
         <ProfileButton user={sessionUser} />
-        {/* {console.log(sessionUser)} */}
         <NavLink to='/events'>Events</NavLink>
         <p className="user-greeting">Hello, {sessionUser.username} </p>
       </>
