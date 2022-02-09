@@ -3,24 +3,44 @@ import { csrfFetch } from "./csrf";
 const GET_EVENTS = 'events/GET';
 const ADD_EVENT = 'events/ADD';
 const EDIT_EVENT = 'events/EDIT';
+const GET_ONE_EVENT = 'events/GET_ONE'
 
-const edit = (event) => ({
-    type: EDIT_EVENT,
-    event
-})
+const oneEvent = (event) => {
+    return {
+        type: GET_ONE_EVENT,
+        event
+    };
+};
 
-export const editEvent = (event) => async (dispatch) => {
-    const response = await csrfFetch(`/api/events/${event.id}`, {
-        method: 'PUT',
-        body: JSON.stringify(event)
-    })
-    if (response.ok) {
-        const event = await response.json()
-        dispatch(edit(event))
-        console.log(response)
-        return event
+export const getEventDetails = (eventId) => async (dispatch) => {
+    const result = await csrfFetch(`/api/events/${eventId}`);
+  
+    if (result.ok) {
+      const event = await result.json();
+      dispatch(oneEvent(event));
     }
-}
+  
+    return result;
+  };
+
+
+// const edit = (event) => ({
+//     type: EDIT_EVENT,
+//     event
+// })
+
+// export const editEvent = (event) => async (dispatch) => {
+//     const response = await csrfFetch(`/api/events/${event.id}`, {
+//         method: 'PUT',
+//         body: JSON.stringify(event)
+//     })
+//     if (response.ok) {
+//         const editedEvent = await response.json()
+//         dispatch(edit(editedEvent))
+//         console.log(response)
+//         return editedEvent
+//     }
+// }
 
 const loadEvents = (events) => ({
     type: GET_EVENTS,
@@ -82,8 +102,16 @@ const eventReducer = (state = {}, action) => {
                 ...state,
                 [action.event.id]: action.event
             }
+        case GET_ONE_EVENT:
+            newState = {
+                ...state,
+                [action.event.id]: {
+                ...state[action.event.id],
+                ...action.event
+                }
+            };
         default:
-            return state;
+            return state; 
     }
 }
 

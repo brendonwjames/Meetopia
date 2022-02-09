@@ -7,6 +7,15 @@ router.get('/', asyncHandler(async (req, res) => {
     return res.json(eventList);
 }));
 
+router.get('/:eventId(\\d+)', asyncHandler(async (req, res) => {
+    const eventId = req.params.eventId;
+    const event = await Event.findByPk(eventId);
+
+    return res.json(event);
+}));
+
+
+
 router.post('/', asyncHandler(async (req, res) => {
     const { hostId, categoryId, eventName, date, capacity } = req.body;
     const newEvent = await Event.create({ hostId, categoryId, eventName, date, capacity })
