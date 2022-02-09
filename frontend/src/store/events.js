@@ -50,11 +50,9 @@ const eventReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {
         case GET_EVENTS:
-            newState = {...state};
-            const events = {};
-            action.events.forEach(event => events[event.id] = event);
-            newState.events = events;
-            return newState
+            newState = {}
+            action.events.forEach(event => newState[event.id] = event)
+                return newState
         case ADD_EVENT:
             // newState = Object.assign({}, state);
             newState = {...state};

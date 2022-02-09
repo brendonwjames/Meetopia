@@ -7,29 +7,19 @@ import { NavLink } from 'react-router-dom';
 const EventListPage = () => {
     const dispatch = useDispatch();
 
-    const eventsObj = useSelector(state => state.events.events)
-    let eventsArr =[];
+    const eventsObj = useSelector(state => state.events)
 
-    if (eventsObj) {
-        let events = Object.values(eventsObj);
-        events.map(event => (
-            eventsArr.push(event)
-        ))
-    }
-
-    
-    // const events = Object.values(eventsObj);
+    const events = Object.values(eventsObj);
     // console.log(events);
-    // console.log(eventsObj, "opopopopopo")
 
     useEffect(() => {
         dispatch(getEvents());
-    }, [])
+    }, [dispatch])
 
     return(
         <>
             <div>Seeing this</div>
-            {eventsArr.map((event) => (
+            {events.map((event) => (
                 <div key={`${event.id}`}>{event.eventName}</div>
             ))}
         </>
