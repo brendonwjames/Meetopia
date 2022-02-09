@@ -25,7 +25,6 @@ const EventListPage = () => {
                 </div>
             ))}
         </>
-        
     )
 }
 

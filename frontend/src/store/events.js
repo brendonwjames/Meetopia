@@ -2,13 +2,32 @@ import { csrfFetch } from "./csrf";
 
 const GET_EVENTS = 'events/GET';
 const ADD_EVENT = 'events/ADD';
+const EDIT_EVENT = 'events/EDIT';
 
+const edit = (event) => ({
+    type: EDIT_EVENT,
+    event
+})
+
+export const editEvent = (event) => async (dispatch) => {
+    const response = await csrfFetch(`/api/events/${event.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(event)
+    })
+    if (response.ok) {
+        const event = await response.json()
+        dispatch(edit(event))
+        console.log(response)
+        return event
+    }
+}
 
 const loadEvents = (events) => ({
     type: GET_EVENTS,
     events
 })
 
+//read event action creator
 export const getEvents = () => async (dispatch) => {
     const response = await csrfFetch(`/api/events`);
 
@@ -24,7 +43,7 @@ export const getEvents = () => async (dispatch) => {
 const addEvent = (event) => ({
     type: ADD_EVENT,
     event
-})
+});
 
 
 //create event thunk action
@@ -58,6 +77,11 @@ const eventReducer = (state = {}, action) => {
             newState = {...state};
             newState.user = action.user;
             return newState;
+        case EDIT_EVENT:
+            return {
+                ...state,
+                [action.event.id]: action.event
+            }
         default:
             return state;
     }

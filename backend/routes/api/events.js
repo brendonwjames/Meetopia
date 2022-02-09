@@ -16,9 +16,8 @@ router.post('/', asyncHandler(async (req, res) => {
 router.put('/:id(\\d+)', asyncHandler(async (req, res) => {
     const event = await Event.findByPk(req.params.id);
     event.hostId = req.body.hostId;
-    event.venueId = req.body.venueId;
     event.categoryId = req.body.categoryId;
-    event.name = req.body.name;
+    event.eventName = req.body.eventName;
     event.date = req.body.date;
     event.capacity = req.body.capacity;
 
