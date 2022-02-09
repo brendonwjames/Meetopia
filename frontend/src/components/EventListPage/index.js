@@ -20,7 +20,7 @@ const EventListPage = () => {
         <>
             {events.map((event) => (
                 <div className='event-container'  key={`${event.id}`}>
-                    <div>{event.eventName}</div>
+                    <NavLink exact to={`/events/${event.id}`}>{event.eventName}</NavLink>
                     <p>Capacity = {`${event.capacity}`}</p>
                 </div>
             ))}

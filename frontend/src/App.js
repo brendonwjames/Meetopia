@@ -25,20 +25,20 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
           <Route exact path='/events'>
             <EventListPage />
           </Route>
-          <Route path='/events/new'>
+          <Route exact path='/events/new'>
             <CreateEventForm />
           </Route>
           <Route exact path='/events/:eventId'>
             <EventDetailsPage />
           </Route>
           <Route>
-            <EditEventPage path='/events/:eventId/edit/'/>
+            <EditEventPage exact path='/events/:eventId/edit/'/>
           </Route>
         </Switch>
       )}
