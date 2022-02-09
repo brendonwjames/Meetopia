@@ -5,49 +5,31 @@ const ADD_EVENT = 'events/ADD';
 const EDIT_EVENT = 'events/EDIT';
 const GET_ONE_EVENT = 'events/GET_ONE'
 
-const oneEvent = (event) => {
-    return {
-        type: GET_ONE_EVENT,
-        event
-    };
-};
+const edit = (event) => ({
+    type: EDIT_EVENT,
+    event
+})
 
-export const getEventDetails = (eventId) => async (dispatch) => {
-    const result = await csrfFetch(`/api/events/${eventId}`);
-  
-    if (result.ok) {
-      const event = await result.json();
-      dispatch(oneEvent(event));
+export const editEvent = (event) => async (dispatch) => {
+    const response = await csrfFetch(`/api/events/${event.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(event)
+    })
+    if (response.ok) {
+        const editedEvent = await response.json()
+        dispatch(edit(editedEvent))
+        console.log(response)
+        return editedEvent
     }
-  
-    return result;
-  };
+}
 
-
-// const edit = (event) => ({
-//     type: EDIT_EVENT,
-//     event
-// })
-
-// export const editEvent = (event) => async (dispatch) => {
-//     const response = await csrfFetch(`/api/events/${event.id}`, {
-//         method: 'PUT',
-//         body: JSON.stringify(event)
-//     })
-//     if (response.ok) {
-//         const editedEvent = await response.json()
-//         dispatch(edit(editedEvent))
-//         console.log(response)
-//         return editedEvent
-//     }
-// }
-
+//read event action creator
 const loadEvents = (events) => ({
     type: GET_EVENTS,
     events
 })
 
-//read event action creator
+//read event action thunk
 export const getEvents = () => async (dispatch) => {
     const response = await csrfFetch(`/api/events`);
 
@@ -58,6 +40,27 @@ export const getEvents = () => async (dispatch) => {
         return eventList
     }
 }
+
+//read one event action creator
+const oneEvent = (event) => {
+    return {
+        type: GET_ONE_EVENT,
+        event
+    };
+};
+
+//read one event action thunk
+export const getEventDetails = (eventId) => async (dispatch) => {
+    //assign the fetch call to result
+    const result = await csrfFetch(`/api/events/${eventId}`);
+    
+    //dispatch action creator result.json if successful
+    if (result.ok) {
+      const event = await result.json();
+      dispatch(oneEvent(event));
+    }
+    return result;
+  };
 
 //create event action creator
 const addEvent = (event) => ({
