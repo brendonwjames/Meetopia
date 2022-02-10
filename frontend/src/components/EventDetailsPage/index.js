@@ -12,6 +12,8 @@ const EventDetailsPage = () => {
     // console.log(eventId);
     const event = useSelector(state => state.events[eventId])
     // console.log(event)
+    const sessionUser = useSelector(state => state.session.user)
+    // console.log(sessionUser.id, "*******", event.hostId)
 
     const dispatch = useDispatch();
 
@@ -19,14 +21,24 @@ const EventDetailsPage = () => {
         dispatch(getEventDetails(eventId))
     }, [dispatch, eventId])
 
+    let editButtons;
+    if (sessionUser && sessionUser.id === event.hostId) {
+        editButtons = (
+            <div className='edit-delete-buttons'>
+                <EditEventModal />
+                <DeleteEventModal />
+            </div>
+        )}
+         else if (sessionUser && sessionUser.id !== event.hostId) {
+            editButtons = <div>nothing here</div>
+        }
 
     return(
         <>
             <h1>{`${event.eventName}`}</h1>
             <p>{`${event.date}`}</p>
             <p>Capacity = {`${event.capacity}`}</p>
-            <EditEventModal />
-            <DeleteEventModal />
+            <div>{editButtons}</div>
         </>
     )
 }
