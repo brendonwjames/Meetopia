@@ -8,15 +8,12 @@ const DeleteEventPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     let { eventId } = useParams();
-
-    const onSubmit = async (e) => {
+    console.log(eventId, "1919191919")
+    
+    const onSubmit = (e) => {
         e.preventDefault();
-
-        const deletedEvent = await dispatch(remove(eventId))
-
-        if (deletedEvent) {
-            history.push('/events')
-        }
+        dispatch(remove(eventId));
+        history.push('/events');
     }
 
     return (

@@ -97,14 +97,15 @@ export const createEvent = (event) => async (dispatch) => {
         method: 'POST',
         body: JSON.stringify({ hostId, categoryId, eventName, date, capacity })
     })
-    let newEvent;
+    console.log(response, '***********')
     //if response is ok, dispatch newEvent using action creator
     if (response.ok) {
-        newEvent = await response.json()
-        dispatch(addEvent(newEvent))
+        event = await response.json()
+        console.log(event, 'poooooooop')
+        dispatch(addEvent(event))
+        return
     }
     //return the newEvent
-    return newEvent;
 }
 
 const eventReducer = (state = {}, action) => {
@@ -116,8 +117,7 @@ const eventReducer = (state = {}, action) => {
             return newState
         case ADD_EVENT:
             // newState = Object.assign({}, state);
-            newState = { ...state };
-            newState.user = action.user;
+            newState = { ...state , [action.event.id]: action.event}
             return newState;
         case EDIT_EVENT:
             return {
@@ -136,7 +136,7 @@ const eventReducer = (state = {}, action) => {
             newState = { ...state }
             delete newState[action.eventId];
             return newState;
-            
+
         default:
             return state;
     }

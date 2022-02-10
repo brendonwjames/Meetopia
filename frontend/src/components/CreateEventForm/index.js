@@ -1,17 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createEvent } from '../../store/events';
 import { Link, useHistory } from "react-router-dom";
 import * as SessionActions from '../../store/session';
 
+
 const CreateEventForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+
     const hostId = useSelector(state => state.session.user.id)
     const [categoryId, setCategoryId] = useState(0);
     const [eventName, setEventName] = useState("");
     const [date, setDate] = useState(new Date());
     const [capacity, setCapacity] = useState(0);
+
+    
 
     const reset = () => {
         setCategoryId(0);
@@ -20,16 +24,13 @@ const CreateEventForm = () => {
         setCapacity(0);
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const event = { hostId, categoryId, eventName, date, capacity }
-        // console.log(event)
-        let newEvent = await dispatch(createEvent(event))
-
-        if (newEvent) {
-            history.push('/events');
-            reset();
-        }
+        console.log(event, "does this exist")
+        dispatch(createEvent(event))
+        history.push('/events');
+        reset();
     }
 
     return (
@@ -67,7 +68,7 @@ const CreateEventForm = () => {
                     />
                 </label>
                 <button type='submit'>Submit</button>
-                <Link to='/' className='cancel-event-button'>Cancel</Link>
+                <Link to='/events' className='cancel-event-button'>Cancel</Link>
             </form>
         </div>
     )

@@ -43,10 +43,10 @@ const EditEventPage = () => {
         e.preventDefault();
 
         const payload = { id: event.id, hostId, categoryId, eventName, date, capacity };
-        let updateEvent = await dispatch(editEvent(payload));
+        let updateEvent = dispatch(editEvent(payload));
 
         if (updateEvent) {
-            history.push('/');
+            history.push('/events');
             reset();
         }
     }
