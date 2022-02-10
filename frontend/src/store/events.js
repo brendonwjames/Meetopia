@@ -4,22 +4,22 @@ const GET_EVENTS = 'events/GET';
 const ADD_EVENT = 'events/ADD';
 const EDIT_EVENT = 'events/EDIT';
 const GET_ONE_EVENT = 'events/GET_ONE'
+const DELETE_EVENT = 'events/DELETE'
 
-const edit = (event) => ({
-    type: EDIT_EVENT,
-    event
-})
+//delete event action creator
+const deleteEvent = (eventId) => ({
+    type: DELETE_EVENT,
+    eventId
+});
 
-export const editEvent = (event) => async (dispatch) => {
-    const response = await csrfFetch(`/api/events/${event.id}`, {
-        method: 'PUT',
-        body: JSON.stringify(event)
-    })
+//delete event action thunk
+export const remove = (eventId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/events/${eventId}`, {
+        method: 'DELETE'
+    });
+
     if (response.ok) {
-        const editedEvent = await response.json()
-        dispatch(edit(editedEvent))
-        console.log(response)
-        return editedEvent
+        dispatch(deleteEvent(eventId))
     }
 }
 
@@ -33,7 +33,6 @@ const loadEvents = (events) => ({
 export const getEvents = () => async (dispatch) => {
     const response = await csrfFetch(`/api/events`);
 
-    // console.log(eventList, "lllllllllllll")
     if (response.ok) {
         const eventList = await response.json();
         dispatch(loadEvents(eventList));
@@ -53,21 +52,41 @@ const oneEvent = (event) => {
 export const getEventDetails = (eventId) => async (dispatch) => {
     //assign the fetch call to result
     const result = await csrfFetch(`/api/events/${eventId}`);
-    
+
     //dispatch action creator result.json if successful
     if (result.ok) {
-      const event = await result.json();
-      dispatch(oneEvent(event));
+        const event = await result.json();
+        dispatch(oneEvent(event));
     }
     return result;
-  };
+};
+
+
+//edit event action creator
+const edit = (event) => ({
+    type: EDIT_EVENT,
+    event
+})
+
+//edit event action thunk
+export const editEvent = (event) => async (dispatch) => {
+    const response = await csrfFetch(`/api/events/${event.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(event)
+    })
+    if (response.ok) {
+        const editedEvent = await response.json()
+        dispatch(edit(editedEvent))
+        console.log(response)
+        return editedEvent
+    }
+}
 
 //create event action creator
 const addEvent = (event) => ({
     type: ADD_EVENT,
     event
 });
-
 
 //create event thunk action
 export const createEvent = (event) => async (dispatch) => {
@@ -94,10 +113,10 @@ const eventReducer = (state = {}, action) => {
         case GET_EVENTS:
             newState = {}
             action.events.forEach(event => newState[event.id] = event)
-                return newState
+            return newState
         case ADD_EVENT:
             // newState = Object.assign({}, state);
-            newState = {...state};
+            newState = { ...state };
             newState.user = action.user;
             return newState;
         case EDIT_EVENT:
@@ -109,12 +128,17 @@ const eventReducer = (state = {}, action) => {
             newState = {
                 ...state,
                 [action.event.id]: {
-                ...state[action.event.id],
-                ...action.event
+                    ...state[action.event.id],
+                    ...action.event
                 }
             };
+        case DELETE_EVENT:
+            newState = { ...state }
+            delete newState[action.eventId];
+            return newState;
+            
         default:
-            return state; 
+            return state;
     }
 }
 

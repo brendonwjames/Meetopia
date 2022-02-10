@@ -18,6 +18,7 @@ const EventListPage = () => {
 
     return(
         <>
+            <NavLink to='/events/new'>Add Event</NavLink>
             {events.map((event) => (
                 <div className='event-container'  key={`${event.id}`}>
                     <NavLink exact to={`/events/${event.id}`}>{event.eventName}</NavLink>

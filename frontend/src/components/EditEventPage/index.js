@@ -11,15 +11,15 @@ const EditEventPage = () => {
     let { eventId } = useParams();
 
     eventId = parseInt(eventId);
-    console.log(eventId, '22')
+    // console.log(eventId, '22')
 
     const eventsObj = useSelector(state => Object.values(state.events))
-    console.log(eventsObj, '*****', eventId)
+    // console.log(eventsObj, '*****', eventId)
     const event = eventsObj.find(event => event.id === eventId);
-    console.log(event)
+    // console.log(event)
 
     const hostId = useSelector(state => state.session.user.id);
-    console.log(hostId, "boooooobooooo")
+    // console.log(hostId, "boooooobooooo")
 
     const [eventName, setEventName] = useState(event?.eventName);
     const [date, setDate] = useState(event?.date);
@@ -31,7 +31,7 @@ const EditEventPage = () => {
         setDate(event?.date);
         setCapacity(event?.capacity);
         setCategoryId(event?.categoryId);
-    }, [event])
+    }, [event, dispatch])
 
     const reset = () => {
         setEventName("");
@@ -46,7 +46,7 @@ const EditEventPage = () => {
         let updateEvent = await dispatch(editEvent(payload));
 
         if (updateEvent) {
-            history.push('/events');
+            history.push('/');
             reset();
         }
     }

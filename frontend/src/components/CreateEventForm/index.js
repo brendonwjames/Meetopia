@@ -27,7 +27,7 @@ const CreateEventForm = () => {
         let newEvent = await dispatch(createEvent(event))
 
         if (newEvent) {
-            history.push('/events/');
+            history.push('/events');
             reset();
         }
     }
