@@ -6,6 +6,7 @@ import CreateEventForm from "./components/CreateEventForm";
 import EventListPage from "./components/EventListPage";
 import EventDetailsPage from "./components/EventDetailsPage";
 import EditEventPage from "./components/EditEventPage";
+import SplashPage from "./components/SplashPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -24,7 +25,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <h1>Eventual Splash Landing</h1>
+            <SplashPage />
           </Route>
           <Route exact path="/signup">
             <SignupFormPage />

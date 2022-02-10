@@ -8,7 +8,6 @@ const DeleteEventPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     let { eventId } = useParams();
-    console.log(eventId, "1919191919")
     
     const onSubmit = (e) => {
         e.preventDefault();

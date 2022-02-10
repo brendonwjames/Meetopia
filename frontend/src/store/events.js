@@ -101,7 +101,6 @@ export const createEvent = (event) => async (dispatch) => {
     //if response is ok, dispatch newEvent using action creator
     if (response.ok) {
         event = await response.json()
-        console.log(event, 'poooooooop')
         dispatch(addEvent(event))
         return
     }

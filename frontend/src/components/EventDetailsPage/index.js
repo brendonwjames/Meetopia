@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getEventDetails } from '../../store/events';
 import EditEventModal from '../EditEventModal';
 import DeleteEventModal from '../DeleteEventModal';
+import './EventDetailsPage.css'
 
 
 

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getEvents } from '../../store/events';
 import { NavLink } from 'react-router-dom';
+import './EventListPage.css';
 
 const EventListPage = () => {
     const dispatch = useDispatch();
@@ -16,15 +17,17 @@ const EventListPage = () => {
     }, [])
 
     return(
-        <>
-            <NavLink to='/events/new'>Add Event</NavLink>
-            {events?.map((event) => (
-                <div className='event-container'  key={`${event?.id}`}>
-                    <NavLink exact to={`/events/${event?.id}`}>{event?.eventName}</NavLink>
-                    <p>Capacity = {`${event?.capacity}`}</p>
-                </div>
-            ))}
-        </>
+        <div className='event-list-container'>
+            <NavLink className='add-event-button' to='/events/new'>Add Event</NavLink>
+            <div className='event-container'>
+                {events?.map((event) => (
+                    <div className='event-container'  key={`${event?.id}`}>
+                        <NavLink exact to={`/events/${event?.id}`}>{event?.eventName}</NavLink>
+                        <p>Capacity = {`${event?.capacity}`}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
     )
 }
 
