@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createEvent } from '../../store/events';
 import { Link, useHistory } from "react-router-dom";
-import * as SessionActions from '../../store/session';
-
 
 const CreateEventForm = () => {
     const dispatch = useDispatch();
@@ -15,8 +13,6 @@ const CreateEventForm = () => {
     const [date, setDate] = useState(new Date());
     const [capacity, setCapacity] = useState(0);
 
-    
-
     const reset = () => {
         setCategoryId(0);
         setEventName("");
@@ -27,7 +23,6 @@ const CreateEventForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const event = { hostId, categoryId, eventName, date, capacity }
-        console.log(event, "does this exist")
         dispatch(createEvent(event))
         history.push('/events');
         reset();

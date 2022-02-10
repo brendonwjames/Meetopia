@@ -10,7 +10,6 @@ const EventListPage = () => {
     const eventsObj = useSelector(state => state.events)
 
     const events = Object.values(eventsObj);
-    console.log(events, "12345");
 
     useEffect(() => {
         dispatch(getEvents());
