@@ -18,9 +18,9 @@ function Navigation({ isLoaded }){
   if (sessionUser) {
     sessionLinks = (
       <>
+        <p className="user-greeting">Hello, {sessionUser.username} </p>
         <ProfileButton user={sessionUser} />
         <NavLink to='/events'>Events</NavLink>
-        <p className="user-greeting">Hello, {sessionUser.username} </p>
       </>
       
     );
@@ -35,12 +35,12 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
+    
+      <div className='navbar-container'>
         {isLoaded && sessionLinks}
-      </li>
-    </ul>
+        <NavLink exact to="/">Home</NavLink>
+      </div>
+    
   );
 }
 
