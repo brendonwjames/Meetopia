@@ -1,7 +1,4 @@
-.event-list-container {
-    
 
-}
 .event-container {
     background-color: white;
     width: 550px;
@@ -15,6 +12,7 @@
     text-transform: uppercase;
     font-weight: 700;
     justify-content: space-evenly;
+    /* text-decoration: ; */
 }
 
 .event-link {

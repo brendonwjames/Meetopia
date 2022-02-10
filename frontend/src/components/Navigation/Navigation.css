@@ -25,6 +25,10 @@
     text-decoration: none;
 }
 
+.home-button:hover {
+    background-color: rgba(211,211,211, .5);
+}
+
 .events-button {
     font-size: 16px;
     border: none;
@@ -38,6 +42,10 @@
     text-decoration: none;
 }
 
+.events-button:hover {
+    background-color: rgba(211,211,211, .5);
+}
+
 .user-greeting {
     font-family: "Gill Sans", sans-serif;
     font-style: italic;
@@ -45,4 +53,38 @@
 
 .profile-dropdown {
     list-style-type: none;
+}
+
+.signup-button {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 5px 10px;
+    background-color: rgba(211,211,211, 1);
+    font-family: inherit;
+    border-radius: 12px;
+    font-family: "Gill Sans", sans-serif;
+    text-decoration: none;
+}
+
+.signup-button:hover {
+    background-color: rgba(211,211,211, .5);
+}
+
+.demo-user-login {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 5px 10px;
+    background-color: rgba(211,211,211, 1);
+    font-family: inherit;
+    border-radius: 12px;
+    font-family: "Gill Sans", sans-serif;
+    text-decoration: none;
+}
+
+.demo-user-login:hover {
+    background-color: rgba(211,211,211, .5);
 }
