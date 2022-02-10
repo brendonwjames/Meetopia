@@ -42,6 +42,9 @@ function App() {
           <Route>
             <EditEventPage exact path='/events/:eventId/edit/'/>
           </Route>
+          {/* <Route>
+            <p>Something went wrong! Error 404</p>
+          </Route> */}
         </Switch>
       )}
     </>

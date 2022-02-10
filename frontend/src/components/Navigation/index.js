@@ -18,9 +18,9 @@ function Navigation({ isLoaded }){
   if (sessionUser) {
     sessionLinks = (
       <>
+        <NavLink className='events-button' to='/events'>Events</NavLink>
         <p className="user-greeting">Hello, {sessionUser.username} </p>
         <ProfileButton user={sessionUser} />
-        <NavLink to='/events'>Events</NavLink>
       </>
       
     );
@@ -37,8 +37,8 @@ function Navigation({ isLoaded }){
   return (
     
       <div className='navbar-container'>
+        <NavLink className='home-button' exact to="/">Home</NavLink>
         {isLoaded && sessionLinks}
-        <NavLink exact to="/">Home</NavLink>
       </div>
     
   );

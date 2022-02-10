@@ -38,7 +38,7 @@ const EventDetailsPage = () => {
         <>
             <h1>{`${event.eventName}`}</h1>
             <p>{`${event.date}`}</p>
-            <p>Capacity = {`${event.capacity}`}</p>
+            <p>Event Capacity: {`${event.capacity}`}</p>
             <div>{editButtons}</div>
         </>
     )

@@ -42,6 +42,7 @@ const CreateEventForm = () => {
                         name='name'
                         value={eventName}
                         onChange={e => setEventName(e.target.value)}
+                        required
                     />
                 </label>
                 <label>
@@ -51,6 +52,7 @@ const CreateEventForm = () => {
                         name='date'
                         value={date}
                         onChange={e => setDate(e.target.value)}
+                        required
                     />
                 </label>
                 <label>

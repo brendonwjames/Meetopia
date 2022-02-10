@@ -65,6 +65,7 @@ const EditEventPage = () => {
                         name="name"
                         value={eventName}
                         onChange={(e) => setEventName(e.target.value)}
+                        required
                     />
                 </label>
                 <label>
@@ -74,6 +75,7 @@ const EditEventPage = () => {
                         name='date'
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
+                        required
                     />
                 </label>
                 <label>

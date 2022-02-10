@@ -22,8 +22,8 @@ const EventListPage = () => {
             <div className='event-container'>
                 {events?.map((event) => (
                     <div className='event-container'  key={`${event?.id}`}>
-                        <NavLink exact to={`/events/${event?.id}`}>{event?.eventName}</NavLink>
-                        <p>Capacity = {`${event?.capacity}`}</p>
+                        <NavLink className='event-link' exact to={`/events/${event?.id}`}>{event?.eventName}</NavLink>
+                        <p className='event-capacity'>Event Capacity: {`${event?.capacity}`}</p>
                     </div>
                 ))}
             </div>
