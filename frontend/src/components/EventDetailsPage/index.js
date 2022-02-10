@@ -31,7 +31,7 @@ const EventDetailsPage = () => {
             </div>
         )}
          else if (sessionUser && sessionUser.id !== event.hostId) {
-            editButtons = <div>nothing here</div>
+            editButtons = <div>:)</div>
         }
 
     return(
