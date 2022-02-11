@@ -3,8 +3,8 @@ import { csrfFetch } from "./csrf";
 const GET_EVENTS = 'events/GET';
 const ADD_EVENT = 'events/ADD';
 const EDIT_EVENT = 'events/EDIT';
-const GET_ONE_EVENT = 'events/GET_ONE'
-const DELETE_EVENT = 'events/DELETE'
+const GET_ONE_EVENT = 'events/GET_ONE';
+const DELETE_EVENT = 'events/DELETE';
 
 //delete event action creator
 const deleteEvent = (eventId) => ({
@@ -57,8 +57,8 @@ export const getEventDetails = (eventId) => async (dispatch) => {
     if (result.ok) {
         const event = await result.json();
         dispatch(oneEvent(event));
+        return result;
     }
-    return result;
 };
 
 
@@ -96,8 +96,8 @@ export const createEvent = (event) => async (dispatch) => {
     const response = await csrfFetch('/api/events', {
         method: 'POST',
         body: JSON.stringify({ hostId, categoryId, eventName, date, capacity })
-    })
-    console.log(response, '***********')
+    });
+    // console.log(response, '***********')
     //if response is ok, dispatch newEvent using action creator
     if (response.ok) {
         event = await response.json()
@@ -131,6 +131,7 @@ const eventReducer = (state = {}, action) => {
                     ...action.event
                 }
             };
+            return newState
         case DELETE_EVENT:
             newState = { ...state }
             delete newState[action.eventId];

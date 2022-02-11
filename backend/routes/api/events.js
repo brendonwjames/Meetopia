@@ -23,6 +23,9 @@ router.get('/:eventId(\\d+)', asyncHandler(async (req, res) => {
 router.post('/', asyncHandler(async (req, res) => {
     const { hostId, categoryId, eventName, date, capacity } = req.body;
     const newEvent = await Event.create({ hostId, categoryId, eventName, date, capacity })
+    // const newRsvp = await Rsvp.findAll({where: {eventId: newEvent.id}})
+    // newEvent.dataValues.Rsvp = newRsvp;
+    const newRsvp = await Rsvp.create({eventId: newEvent.id, userId: hostId})
     res.json(newEvent)
 }));
 

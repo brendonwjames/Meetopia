@@ -17,16 +17,16 @@ const EventDetailsPage = () => {
     const { eventId } = useParams()
     // console.log(eventId);
     const event = useSelector(state => state.events[eventId])
-    // console.log(event)
     const sessionUser = useSelector(state => state.session.user)
     // console.log(sessionUser.id, "*******", event.hostId)
-
+    
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         dispatch(getEventDetails(eventId))
     }, [dispatch, eventId])
-
+    
+    // console.log(event.Rsvps)
     let editButtons;
     if (sessionUser && sessionUser.id === event.hostId) {
         editButtons = (
@@ -38,12 +38,21 @@ const EventDetailsPage = () => {
          else if (sessionUser && sessionUser.id !== event.hostId) {
             editButtons = <div></div>
         }
+    
+    let attendance;
+    if (event.Rsvps) {
+        attendance = event.Rsvps.length;
+    } else {
+        attendance = 0
+    }
 
     return(
         <>
             <h1 className='event-name'>{`${event.eventName}`}</h1>
             <p className='date'>{`${formatDate(event.date)}`}</p>
             <p className='capacity'>Event Capacity: {`${event.capacity}`}</p>
+            {/* <div className='rsvp-count'>Number of Attendees: {`${attendance}`}</div> */}
+            <button className='attendnace-button'>I would like to attend this event!</button>
             <div className='edit-buttons'>{editButtons}</div>
         </>
     )
