@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {});
   Rsvp.associate = function(models) {
-    // associations can be defined here
+    // associations can be defined here 
     Rsvp.belongsTo(models.Event, { foreignKey: "eventId" })
     Rsvp.belongsTo(models.User, { foreignKey: "userId" })
   };

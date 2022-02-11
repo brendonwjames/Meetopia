@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const asyncHandler = require('express-async-handler');
-const { Event, Group } = require('../../db/models');
+const { Event, Rsvp, Group, User } = require('../../db/models');
 
 router.get('/', asyncHandler(async (req, res) => {
     const eventList = await Event.findAll();
@@ -9,8 +9,12 @@ router.get('/', asyncHandler(async (req, res) => {
 
 router.get('/:eventId(\\d+)', asyncHandler(async (req, res) => {
     const eventId = req.params.eventId;
-    const event = await Event.findByPk(eventId);
-
+    const event = await Event.findByPk(eventId, {
+        include: {model: Rsvp, where: {
+            eventId
+        }}
+    });
+    
     return res.json(event);
 }));
 
