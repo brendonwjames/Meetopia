@@ -40,6 +40,10 @@
     text-decoration: none;
 }
 
+.confirm-changes-button:hover {
+    background-color: rgba(211,211,211, .5);
+}
+
 .cancel-event-button {
     font-size: 16px;
     border: none;
@@ -51,4 +55,8 @@
     border-radius: 12px;
     font-family: "Gill Sans", sans-serif;
     text-decoration: none;
+}
+
+.cancel-event-button:hover {
+    background-color: rgba(211,211,211, .5);
 }

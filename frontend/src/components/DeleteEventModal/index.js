@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import DeleteEventPage from '../DeleteEventPage';
+import './DeleteEventModal.css';
 
 const DeleteEventModal = () => {
   const [showModal, setShowModal] = useState(false);
@@ -8,7 +9,7 @@ const DeleteEventModal = () => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Delete</button>
+      <button className='delete-button' onClick={() => setShowModal(true)}>Delete</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <DeleteEventPage closeModal={() => setShowModal(false)} closeModal={() => reload()}/>

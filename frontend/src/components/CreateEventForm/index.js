@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createEvent } from '../../store/events';
-import { Link, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
+import './CreateEventForm.css';
 
 const CreateEventForm = () => {
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const CreateEventForm = () => {
                 className='event-form'
                 onSubmit={handleSubmit}
             >
-                <h2>Add a new Event</h2>
+                <h2>Add a New Event</h2>
                 <label>
                     Event Name
                     <input
@@ -46,7 +47,7 @@ const CreateEventForm = () => {
                     />
                 </label>
                 <label>
-                    Date
+                    Choose Date
                     <input
                         type='date'
                         name='date'
@@ -56,7 +57,7 @@ const CreateEventForm = () => {
                     />
                 </label>
                 <label>
-                    Capacity
+                    Event Capacity
                     <input
                         type='capacity'
                         name='capacity'
@@ -64,8 +65,8 @@ const CreateEventForm = () => {
                         onChange={e => setCapacity(e.target.value)}
                     />
                 </label>
-                <button type='submit'>Submit</button>
-                <Link to='/events' className='cancel-event-button'>Cancel</Link>
+                <button className='submit-button' type='submit'>Submit</button>
+                <NavLink to='/events' className='cancel-event-button'>Cancel</NavLink>
             </form>
         </div>
     )

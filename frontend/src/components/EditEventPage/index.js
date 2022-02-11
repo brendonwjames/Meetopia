@@ -5,7 +5,6 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { editEvent } from '../../store/events';
 import './EditEventPage.css';
 
-
 const EditEventPage = () => {
     const dispatch = useDispatch();
     const history = useHistory();

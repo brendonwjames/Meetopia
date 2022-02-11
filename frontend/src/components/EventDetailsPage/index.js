@@ -31,12 +31,12 @@ const EventDetailsPage = () => {
     if (sessionUser && sessionUser.id === event.hostId) {
         editButtons = (
             <div className='edit-delete-buttons'>
-                <EditEventModal />
+                <EditEventModal className/>
                 <DeleteEventModal />
             </div>
         )}
          else if (sessionUser && sessionUser.id !== event.hostId) {
-            editButtons = <div>:)</div>
+            editButtons = <div></div>
         }
 
     return(

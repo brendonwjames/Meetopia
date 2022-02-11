@@ -1,0 +1,32 @@
+.event-form-container {
+    /* display: flex;
+    /* height: 100px; */
+    /* padding-top: 15px; */
+    /* justify-content: center;
+    border: solid black .25em
+    flex-direction: column; */
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.submit-button {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 5px 10px;
+    background-color: rgba(211,211,211, 1);
+    font-family: inherit;
+    border-radius: 12px;
+    font-family: "Gill Sans", sans-serif;
+    text-decoration: none;
+}
+
+.submit-button:hover {
+    background-color: rgba(211,211,211, .5);
+}
