@@ -6,7 +6,12 @@ import EditEventModal from '../EditEventModal';
 import DeleteEventModal from '../DeleteEventModal';
 import './EventDetailsPage.css'
 
-
+const formatDate = (date) => {
+    const dateString = new Date(date).toDateString();
+    const dateStringSplit = dateString.split(' ');
+    const formattedDate = `${dateStringSplit[0]}, ${dateStringSplit[1]} ${dateStringSplit[2]}, ${dateStringSplit[3]}`;
+    return formattedDate;
+}
 
 const EventDetailsPage = () => {
     const { eventId } = useParams()
@@ -36,10 +41,10 @@ const EventDetailsPage = () => {
 
     return(
         <>
-            <h1>{`${event.eventName}`}</h1>
-            <p>{`${event.date}`}</p>
-            <p>Event Capacity: {`${event.capacity}`}</p>
-            <div>{editButtons}</div>
+            <h1 className='event-name'>{`${event.eventName}`}</h1>
+            <p className='date'>{`${formatDate(event.date)}`}</p>
+            <p className='capacity'>Event Capacity: {`${event.capacity}`}</p>
+            <div className='edit-buttons'>{editButtons}</div>
         </>
     )
 }

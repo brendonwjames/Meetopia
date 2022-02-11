@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { editEvent } from '../../store/events';
+import './EditEventPage.css';
 
 
 const EditEventPage = () => {
@@ -52,12 +53,12 @@ const EditEventPage = () => {
     }
 
     return (
-        <div className='event-form-container'>
+        <div className='edit-event-modal'>
             <form
                 className='event-form'
                 onSubmit={handleSubmit}
             >
-                <div>Edit</div>
+                
                 <label>
                     Name
                     <input
@@ -90,8 +91,9 @@ const EditEventPage = () => {
                 <div className='event-form-buttons'>
                     <button
                         type="submit"
+                        className='confirm-changes-button'
                     >
-                        Confirm
+                        Confirm Changes
                     </button>
                     <Link to='/events/' className='cancel-event-button'>Cancel</Link>
                 </div>

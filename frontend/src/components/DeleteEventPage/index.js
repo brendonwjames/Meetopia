@@ -1,8 +1,8 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { useHistory, useParams } from 'react-router-dom';
 import { remove } from '../../store/events';
+import './DeleteEventPage.css'
 
 const DeleteEventPage = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,10 @@ const DeleteEventPage = () => {
     }
 
     return (
-        <button onClick={onSubmit}>Confirm Delete</button>
+        <div className='delete-event-modal'>
+            <p className='modal-message'>Are you sure you want to delete this event?</p>
+            <button className='confirm-delete-button' onClick={onSubmit}>Confirm Delete</button>
+        </div>
     )
 };
 
