@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { getEventDetails } from '../../store/events';
+import { addRsvp } from '../../store/events';
 import EditEventModal from '../EditEventModal';
 import DeleteEventModal from '../DeleteEventModal';
-import './EventDetailsPage.css'
-
+import './EventDetailsPage.css';
 const formatDate = (date) => {
     const dateString = new Date(date).toDateString();
     const dateStringSplit = dateString.split(' ');
@@ -19,6 +19,7 @@ const EventDetailsPage = () => {
     const event = useSelector(state => state.events[eventId])
     const sessionUser = useSelector(state => state.session.user)
     // console.log(sessionUser.id, "*******", event.hostId)
+    const rsvp = useSelector(state => state)
     
     const dispatch = useDispatch();
     
@@ -52,7 +53,11 @@ const EventDetailsPage = () => {
             <p className='date'>{`${formatDate(event.date)}`}</p>
             <p className='capacity'>Event Capacity: {`${event.capacity}`}</p>
             {/* <div className='rsvp-count'>Number of Attendees: {`${attendance}`}</div> */}
-            <button className='attendnace-button'>I would like to attend this event!</button>
+            <button className='attendnace-button' 
+                    onClick={() => dispatch(addRsvp({userId: sessionUser.id, eventId }))}
+                    >
+                        I would like to attend this event!
+            </button>
             <div className='edit-buttons'>{editButtons}</div>
         </>
     )

@@ -34,6 +34,9 @@ npx dotenv sequelize db:migrate
 npx sequelize seed:generate --name rsvpsSeed
 npx dotenv sequelize db:seed:all
 
+groups table
+npx sequelize model:generate --name Group --attributes ownerId:integer,groupName:string,description:string
+npx dotenv sequelize db:migrate
 
 
 

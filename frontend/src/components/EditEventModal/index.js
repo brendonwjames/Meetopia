@@ -9,7 +9,7 @@ const EditEventModal = () => {
 
   return (
     <>
-      <button className='edit-button'onClick={() => setShowModal(true)}>Edit</button>
+      <button className='edit-button' onClick={() => setShowModal(true)}>Edit</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditEventPage closeModal={() => setShowModal(false)}/>

@@ -5,6 +5,42 @@ const ADD_EVENT = 'events/ADD';
 const EDIT_EVENT = 'events/EDIT';
 const GET_ONE_EVENT = 'events/GET_ONE';
 const DELETE_EVENT = 'events/DELETE';
+const CREATE_RSVP = 'events/CREATE_RSVP';
+const DELETE_RSVP = 'events/DELETE_RSVP';
+
+const deleteRsvp = (eventRsvp) => ({
+    type: DELETE_RSVP,
+    eventRsvp
+})
+
+export const removeRsvp = (rsvp) => async (dispatch) => {
+    const response = await csrfFetch('/api/events/rsvp', {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        dispatch(deleteRsvp(rsvp))
+    }
+}
+
+const createRsvp = (eventRsvp) => ({
+    type: CREATE_RSVP,
+    eventRsvp
+});
+
+export const addRsvp = (rsvp) => async (dispatch) => {
+    const { eventId, userId } = rsvp;
+    const response = await csrfFetch('/api/events/rsvp', {
+        method: 'POST',
+        body: JSON.stringify({ eventId, userId })
+    })
+
+    if (response.ok) {
+        rsvp = await response.json()
+        dispatch(createRsvp(rsvp))
+        return
+    }
+}
 
 //delete event action creator
 const deleteEvent = (eventId) => ({
@@ -77,7 +113,7 @@ export const editEvent = (event) => async (dispatch) => {
     if (response.ok) {
         const editedEvent = await response.json()
         dispatch(edit(editedEvent))
-        console.log(response)
+        // console.log(response)
         return editedEvent
     }
 }
@@ -116,7 +152,10 @@ const eventReducer = (state = {}, action) => {
             return newState
         case ADD_EVENT:
             // newState = Object.assign({}, state);
-            newState = { ...state , [action.event.id]: action.event}
+            newState = { ...state, [action.event.id]: action.event }
+            return newState;
+        case CREATE_RSVP:
+            newState = { ...state, rsvps: { [action.eventRsvp.id]: action.eventRsvp }}
             return newState;
         case EDIT_EVENT:
             return {
@@ -136,7 +175,10 @@ const eventReducer = (state = {}, action) => {
             newState = { ...state }
             delete newState[action.eventId];
             return newState;
-
+        case DELETE_RSVP:
+            newState = { ...state }
+            delete newState[action.eventRsvp]
+            return newState;
         default:
             return state;
     }
