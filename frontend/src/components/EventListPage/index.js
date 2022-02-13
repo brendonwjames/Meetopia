@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getEvents } from '../../store/events';
+import { getEvents, getEventDetails } from '../../store/events';
 import { NavLink } from 'react-router-dom';
 import './EventListPage.css';
 
@@ -14,7 +14,7 @@ const EventListPage = () => {
 
     useEffect(() => {
         dispatch(getEvents());
-    }, [])
+    }, [dispatch])
 
     return(
         <div className='event-list-container'>

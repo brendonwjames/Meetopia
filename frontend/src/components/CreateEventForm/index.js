@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createEvent } from '../../store/events';
 import { NavLink, useHistory } from "react-router-dom";
+import { getEvents } from '../../store/events';
 import './CreateEventForm.css';
 
 const CreateEventForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+
+    
 
     const hostId = useSelector(state => state.session.user.id)
     const [categoryId, setCategoryId] = useState(0);
@@ -18,15 +21,24 @@ const CreateEventForm = () => {
         setCategoryId(0);
         setEventName("");
         setDate(new Date());
-        setCapacity(0);
+        setCapacity(20);
     }
+
+    //  useEffect(() => {
+    //      dispatch(getEvents())
+    //        reset() 
+    //     }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const event = { hostId, categoryId, eventName, date, capacity }
+
+
         dispatch(createEvent(event))
-        history.push('/events');
+        dispatch(getEvents())
         reset();
+        history.push('/events');
+        return
     }
 
     return (
@@ -63,6 +75,7 @@ const CreateEventForm = () => {
                         name='capacity'
                         value={capacity}
                         onChange={e => setCapacity(e.target.value)}
+                        required
                     />
                 </label>
                 <button className='submit-button' type='submit'>Submit</button>

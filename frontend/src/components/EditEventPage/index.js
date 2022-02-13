@@ -33,7 +33,6 @@ const EditEventPage = () => {
         setDate(event?.date);
         setCapacity(event?.capacity);
         setCategoryId(event?.categoryId);
-        dispatch(getEventDetails())
     }, [event, dispatch])
 
     const reset = () => {
@@ -52,6 +51,7 @@ const EditEventPage = () => {
             history.push('/events');
             reset();
         }
+        dispatch(getEventDetails(eventId))
     }
 
     return (
