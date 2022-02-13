@@ -7,15 +7,36 @@ const GET_ONE_EVENT = 'events/GET_ONE';
 const DELETE_EVENT = 'events/DELETE';
 const CREATE_RSVP = 'events/CREATE_RSVP';
 const DELETE_RSVP = 'events/DELETE_RSVP';
+// const GET_RSVPS = 'events/GET_RSVPS';
+
+// const getRsvps = (rsvps) => ({
+//     type: GET_RSVPS,
+//     rsvps
+// });
+
+// export const loadRsvps = () => async (dispatch) => {
+//     const response = await csrfFetch(`/api/events/rsvp`, {
+//         method: 'GET'
+//     });
+
+//     if (response.ok) {
+//         const rsvpList = await response.json();
+//         dispatch(getRsvps(rsvpList));
+//         console.log(rsvpList)
+//         return rsvpList
+//     }
+// }
 
 const deleteRsvp = (eventRsvp) => ({
     type: DELETE_RSVP,
     eventRsvp
-})
+});
 
 export const removeRsvp = (rsvp) => async (dispatch) => {
-    const response = await csrfFetch('/api/events/rsvp', {
-        method: 'DELETE'
+    const { rsvpEvent, rsvpUser } = rsvp;
+    const response = await csrfFetch(`/api/events/rsvp`, {
+        method: 'DELETE',
+        body: JSON.stringify({ rsvpEvent, rsvpUser })
     })
 
     if (response.ok) {
@@ -154,8 +175,21 @@ const eventReducer = (state = {}, action) => {
             // newState = Object.assign({}, state);
             newState = { ...state, [action.event.id]: action.event }
             return newState;
+        // case GET_RSVPS:
+        //     newState = {}
+        //     Object.entries(action.rsvps)
+        //     return newState
         case CREATE_RSVP:
-            newState = { ...state, rsvps: { [action.eventRsvp.id]: action.eventRsvp }}
+            // newState = { ...state, rsvps: { [action.eventRsvp.id]: action.eventRsvp }}
+            newState = {
+                ...state,
+                [action.eventRsvp.eventId]: {
+                    ...state[action.eventRsvp.eventId],
+                    Rsvps: [
+                    ...state[action.eventRsvp.eventId].Rsvps,
+                    action.eventRsvp,
+                ]}
+            };
             return newState;
         case EDIT_EVENT:
             return {

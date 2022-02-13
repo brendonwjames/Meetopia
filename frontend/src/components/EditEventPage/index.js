@@ -2,7 +2,9 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
+// import { get } from '../../../../backend/routes/api/events';
 import { editEvent } from '../../store/events';
+import { getEventDetails } from '../../store/events';
 import './EditEventPage.css';
 
 const EditEventPage = () => {
@@ -31,6 +33,7 @@ const EditEventPage = () => {
         setDate(event?.date);
         setCapacity(event?.capacity);
         setCategoryId(event?.categoryId);
+        dispatch(getEventDetails())
     }, [event, dispatch])
 
     const reset = () => {

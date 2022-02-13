@@ -3,7 +3,9 @@ const asyncHandler = require('express-async-handler');
 const { Event, Rsvp } = require('../../db/models');
 
 router.get('/', asyncHandler(async (req, res) => {
-    const eventList = await Event.findAll();
+    const eventList = await Event.findAll({include: {
+        model: Rsvp
+    }});
     return res.json(eventList);
 }));
 
@@ -14,7 +16,6 @@ router.get('/:eventId(\\d+)', asyncHandler(async (req, res) => {
             eventId
         }}
     });
-    
     return res.json(event);
 }));
 
@@ -54,10 +55,17 @@ router.post('/rsvp', asyncHandler(async (req, res) => {
 }
 }));
 
-router.delete('/rsvp', asyncHandler(async (req, res) => {
-    const rsvp = await Rsvp.findByPk(req.params.id);
-    await rsvp.destroy();
-    res.json({});
+router.delete(`/rsvp`, asyncHandler(async (req, res) => {
+    try {
+    const { rsvpEvent, rsvpUser } = req.body;
+    console.log('RSVPEVENT:', rsvpEvent, 'RSVPUSER:', rsvpUser);
+    const rsvp = await Rsvp.findOne({
+        where: { eventId: rsvpEvent, userId: rsvpUser } });
+    await rsvp.destroy()
+    return res.json('success!');
+} catch(error) {
+    console.log(error)
+}
 }));
 
 module.exports = router
