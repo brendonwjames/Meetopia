@@ -38,7 +38,7 @@ const EditEventPage = () => {
     const reset = () => {
         setEventName("");
         setDate(new Date());
-        setCapacity(0);
+        setCapacity(20);
     }
 
     const handleSubmit = async (e) => {
@@ -88,6 +88,7 @@ const EditEventPage = () => {
                         name="capacity"
                         value={capacity}
                         onChange={(e) => setCapacity(e.target.value)}
+                        required
                     />
                 </label>
                 <div className='event-form-buttons'>

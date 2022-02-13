@@ -15,7 +15,7 @@ const CreateEventForm = () => {
     const [categoryId, setCategoryId] = useState(0);
     const [eventName, setEventName] = useState("");
     const [date, setDate] = useState(new Date());
-    const [capacity, setCapacity] = useState(0);
+    const [capacity, setCapacity] = useState(20);
 
     const reset = () => {
         setCategoryId(0);
