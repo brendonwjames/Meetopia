@@ -22,7 +22,7 @@ Using node.js
 
 - Feel free to change the username, password, database name, port, and seucred characters for the JWT_SECRET found in the .env file.
 
-- Create a PostgreSQL USER with CREATED and PASSWORD using the same information entered into your .env file.
+- Create a PostgreSQL USER with CREATEDB and PASSWORD using the same information entered into your .env file.
 
       CREATE USER <username> WITH PASSWORD <'password'> CREATEDB;
 
