@@ -40,7 +40,7 @@ export const removeRsvp = (rsvp) => async (dispatch) => {
     })
 
     if (response.ok) {
-        dispatch(deleteRsvp(rsvp))
+        dispatch(getEventDetails(rsvpEvent))
     }
 }
 
