@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createEvent } from '../../store/events';
 import { NavLink, useHistory } from "react-router-dom";
-import { getEvents } from '../../store/events';
 import './CreateEventForm.css';
 
 const CreateEventForm = () => {
@@ -14,14 +13,14 @@ const CreateEventForm = () => {
     const [eventName, setEventName] = useState("");
     const [date, setDate] = useState(new Date());
     const [capacity, setCapacity] = useState(20);
-    const [ errors, setErrors ] = useState([]);
+    const [errors, setErrors] = useState([]);
 
-    const reset = () => {
-        setCategoryId(0);
-        setEventName("");
-        setDate(new Date());
-        setCapacity(20);
-    }
+    // const reset = () => {
+    //     setCategoryId(0);
+    //     setEventName("");
+    //     setDate(new Date());
+    //     setCapacity(20);
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,7 +49,6 @@ const CreateEventForm = () => {
     } else {
       errorMsg = null;
     }
-    console.log(errorMsg, "555555")
 
     return (
         <div className='event-form-page-container'>

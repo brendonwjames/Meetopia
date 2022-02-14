@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { editEvent, getEventDetails } from '../../store/events';
+import { editEvent } from '../../store/events';
 import './EditEventPage.css';
 
 const EditEventPage = () => {
@@ -23,7 +23,8 @@ const EditEventPage = () => {
     const [eventName, setEventName] = useState(event?.eventName);
     const [date, setDate] = useState(event?.date);
     const [capacity, setCapacity] = useState(event?.capacity);
-    const [categoryId, setCategoryId] = useState(event?.categoryId)
+    const [categoryId, setCategoryId] = useState(event?.categoryId);
+    const [errors, setErrors] = useState([]);
 
     useEffect(()=> {
         setEventName(event?.eventName);
@@ -32,23 +33,44 @@ const EditEventPage = () => {
         setCategoryId(event?.categoryId);
     }, [event, dispatch])
 
-    const reset = () => {
-        setEventName("");
-        setDate(new Date());
-        setCapacity(20);
-    }
+    // const reset = () => {
+    //     setEventName("");
+    //     setDate(new Date());
+    //     setCapacity(20);
+    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrors([]);
 
         const payload = { id: event.id, hostId, categoryId, eventName, date, capacity };
-        let updateEvent = dispatch(editEvent(payload));
+        // let updateEvent = dispatch(editEvent(payload));
 
-        if (updateEvent) {
-            history.push('/events');
-            reset();
-        }
-        dispatch(getEventDetails(eventId))
+        // if (updateEvent) {
+        //     history.push('/events');
+        //     reset();
+        // }
+
+        return dispatch(editEvent(payload))
+            .then(() => history.push(`/events/`))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            })
+    }
+
+    let errorMsg;
+    if (errors.length > 0) {
+      errorMsg = (
+        <div className='event-form-errors'>
+          <p>The following error(s) occurred:</p>
+          <ul>
+            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          </ul>
+        </div>
+      );
+    } else {
+      errorMsg = null;
     }
 
     return (
@@ -57,7 +79,7 @@ const EditEventPage = () => {
                 className='event-form'
                 onSubmit={handleSubmit}
             >
-                
+                {errorMsg}
                 <label>
                     Name
                     <input
