@@ -1,15 +1,22 @@
+.full-page-container {
+    display: flex;
+    justify-content: center;
+}
+
 .navbar-container {
     outline: solid black;
     display: flex;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
     align-items: center;
     padding-left: 15px;
     gap: 25px;
     border-radius: 12px;
     height: 70px;
-    background-color:rgb(255,255,255);
+    background-color: indigo;
     box-shadow:0px 1px 1px black;
     margin-bottom: 15px;
+    width: 700px;
+    
 }
 
 .home-button {
@@ -49,10 +56,12 @@
 .user-greeting {
     font-family: "Gill Sans", sans-serif;
     font-style: italic;
+    color: rgba(211,211,211, 1);
 }
 
 .profile-dropdown {
     list-style-type: none;
+    color: rgba(211,211,211, 1)
 }
 
 .signup-button {

@@ -35,11 +35,12 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    
+    <div className='full-page-container'>
       <div className='navbar-container'>
         <NavLink className='home-button' exact to="/">Home</NavLink>
         {isLoaded && sessionLinks}
       </div>
+    </div>
     
   );
 }
