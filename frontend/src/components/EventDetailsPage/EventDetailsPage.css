@@ -1,8 +1,79 @@
+.event-details-page-container {
+    display: flex;
+    justify-content: center;
+}
+
+.event-details-container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    display: flex;
+    background-color: white;
+    /* border: solid black 5px; */
+    /* border-radius: 15px; */
+    padding-left: 10px;
+    padding-bottom: 10px;
+    font-family: "Gill Sans", sans-serif;
+}
+
 .event-name {
     font-family: "Gill Sans", sans-serif;
     font-style: italic;
+    border: solid black ;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
 }
 
 .capacity {
     font-style: italic;
+}
+
+.date {
+    font-weight: bold;
+    font-family: "Gill Sans", sans-serif;
+}
+
+.delete-rsvp-button {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 5px 10px;
+    background-color: red;
+    font-family: inherit;
+    border-radius: 12px;
+    font-family: "Gill Sans", sans-serif;
+    text-decoration: none;
+    margin-top: 10px
+}
+
+.delete-rsvp-button:hover {
+    background-color: rgba(255,0,0, .5);
+}
+
+.rsvp-button {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 5px 10px;
+    background-color: forestgreen;
+    font-family: inherit;
+    border-radius: 12px;
+    font-family: "Gill Sans", sans-serif;
+    text-decoration: none;
+    margin-top: 10px
+}
+
+.host-attendance-message {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.rsvp-button:hover {
+    background-color: rgba(34,139,34, .5);
+}
+
+.rsvp-count {
+    margin-top: 20px;
+    margin-bottom: 20px
 }

@@ -42,45 +42,49 @@ const CreateEventForm = () => {
     }
 
     return (
-        <div className='event-form-container'>
-            <form
-                className='event-form'
-                onSubmit={handleSubmit}
-            >
-                <h2>Add a New Event</h2>
-                <label>
-                    Event Name
-                    <input
-                        type='text'
-                        name='name'
-                        value={eventName}
-                        onChange={e => setEventName(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Choose Date
-                    <input
-                        type='date'
-                        name='date'
-                        value={date}
-                        onChange={e => setDate(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Event Capacity
-                    <input
-                        type='capacity'
-                        name='capacity'
-                        value={capacity}
-                        onChange={e => setCapacity(e.target.value)}
-                        required
-                    />
-                </label>
-                <button className='submit-button' type='submit'>Submit</button>
-                <NavLink to='/events' className='cancel-event-button'>Cancel</NavLink>
-            </form>
+        <div className='event-form-page-container'>
+
+        
+            <div className='event-form-container'>
+                <form
+                    className='event-form'
+                    onSubmit={handleSubmit}
+                >
+                    <h2>Add a New Event</h2>
+                    <label>
+                        Event Name
+                        <input
+                            type='text'
+                            name='name'
+                            value={eventName}
+                            onChange={e => setEventName(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Choose Date
+                        <input
+                            type='date'
+                            name='date'
+                            value={date}
+                            onChange={e => setDate(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Event Capacity
+                        <input
+                            type='capacity'
+                            name='capacity'
+                            value={capacity}
+                            onChange={e => setCapacity(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <button className='submit-button' type='submit'>Submit</button>
+                    <NavLink to='/events' className='cancel-event-button'>Cancel</NavLink>
+                </form>
+            </div>
         </div>
     )
 }

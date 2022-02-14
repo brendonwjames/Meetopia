@@ -63,7 +63,7 @@ const EventDetailsPage = () => {
                 <DeleteEventModal />
             </div>
         )
-        attendanceButtons = <div>You are the host. Of course you are attending!</div>
+        attendanceButtons = <div className='host-attendnace-message'>You are the host. Of course you are attending!</div>
     }
     else if (sessionUser && sessionUser.id !== event.hostId) {
         editButtons = <div></div>
@@ -80,14 +80,18 @@ const EventDetailsPage = () => {
     }
 
     return (
-        <>
-            <h1 className='event-name'>{`${event.eventName}`}</h1>
-            <p className='date'>{`${formatDate(event.date)}`}</p>
-            <p className='capacity'>Event Capacity: {`${event.capacity}`}</p>
-            <span>{attendanceButtons}</span>
-            <div className='rsvp-count'>Number of Attendees: {`${attendance}`}</div>
-            <div className='edit-buttons'>{editButtons}</div>
-        </>
+        <div className='event-details-page-container'>
+            <div className='event-details-container'>
+                <div className='event-name-container'>
+                    <h1 className='event-name'>{`${event.eventName}`}</h1>
+                </div>
+                <p className='date'>{`${formatDate(event.date)}`}</p>
+                <p className='capacity'>Event Capacity: {`${event.capacity}`}</p>
+                <span>{attendanceButtons}</span>
+                <div className='rsvp-count'>Number of Attendees: {`${attendance}`}</div>
+                <div className='edit-buttons'>{editButtons}</div>
+            </div>
+        </div>
     )
 }
 

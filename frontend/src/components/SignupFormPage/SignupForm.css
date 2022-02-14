@@ -3,6 +3,19 @@
     justify-content: center;
 }
 
+.signup-form-container {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border: solid black 5px;
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    height: 220px;
+    width: 400px;
+    font-family: "Gill Sans", sans-serif;
+}
+
 .signup-form {
     display: flex;
     flex-direction: column;
@@ -12,7 +25,7 @@
 }
 
 input {
-    margin-top: 10px
+    margin-top: 10px;
 }
 
 .submit-button {
