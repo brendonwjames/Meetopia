@@ -48,7 +48,7 @@ const EditEventPage = () => {
         let updateEvent = dispatch(editEvent(payload));
 
         if (updateEvent) {
-            history.push('/');
+            history.push('/events');
             reset();
         }
         dispatch(getEventDetails(eventId))
