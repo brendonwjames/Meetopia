@@ -4,10 +4,9 @@ Meetopia is a Meetup clone built using React, JS, Sequelize, Redux, Express, and
 
 ## Getting Started
 
-To setup the project - 
+To start setup of the project:
 
-Using node.js
-  npm install npm@latest -g
+   npm install npm@latest -g
   
 ## Installation
 - Clone the repo, or download the zip file from the repo
