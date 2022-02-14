@@ -1,10 +1,7 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
-// import { get } from '../../../../backend/routes/api/events';
-import { editEvent } from '../../store/events';
-import { getEventDetails } from '../../store/events';
+import { editEvent, getEventDetails } from '../../store/events';
 import './EditEventPage.css';
 
 const EditEventPage = () => {
@@ -13,7 +10,7 @@ const EditEventPage = () => {
     let { eventId } = useParams();
 
     eventId = parseInt(eventId);
-    // console.log(eventId, '22')
+    // console.log(eventId)
 
     const eventsObj = useSelector(state => Object.values(state.events))
     // console.log(eventsObj, '*****', eventId)
@@ -21,7 +18,7 @@ const EditEventPage = () => {
     // console.log(event)
 
     const hostId = useSelector(state => state.session.user.id);
-    // console.log(hostId, "boooooobooooo")
+    // console.log(hostId)
 
     const [eventName, setEventName] = useState(event?.eventName);
     const [date, setDate] = useState(event?.date);

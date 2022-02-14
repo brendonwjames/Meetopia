@@ -1,6 +1,25 @@
 const router = require('express').Router();
 const asyncHandler = require('express-async-handler');
+const { check, body } = require('express-validator');
 const { Event, Rsvp } = require('../../db/models');
+const { handleValidationErrors } = require('../../utils/validation');
+
+const validateEvent = [
+    check('eventName')
+        .exists({ checkFalsy: true })
+        .withMessage('Event needs a name!')
+        .isLength({ max: 200 })
+        .withMessage('Event name must be shorter! (200 characters max)'),
+    check('date')
+        .isAfter(`${new Date()}`)
+        .withMessage('Date must be set in the future.'),
+    check('capacity')
+        .isInt({ min: 1 })
+        .withMessage('Capacity must be greater than 0.'),
+    handleValidationErrors
+];
+
+
 
 router.get('/', asyncHandler(async (req, res) => {
     const eventList = await Event.findAll({include: {
@@ -19,7 +38,7 @@ router.get('/:eventId(\\d+)', asyncHandler(async (req, res) => {
     return res.json(event);
 }));
 
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/', validateEvent, asyncHandler(async (req, res) => {
     const { hostId, categoryId, eventName, date, capacity } = req.body;
     const newEvent = await Event.create({ hostId, categoryId, eventName, date, capacity })
     // const newRsvp = await Rsvp.findAll({where: {eventId: newEvent.id}})
@@ -28,7 +47,7 @@ router.post('/', asyncHandler(async (req, res) => {
     res.json(newEvent)
 }));
 
-router.put('/:id(\\d+)', asyncHandler(async (req, res) => {
+router.put('/:id(\\d+)', validateEvent, asyncHandler(async (req, res) => {
     const event = await Event.findByPk(req.params.id);
     event.hostId = req.body.hostId;
     event.categoryId = req.body.categoryId;
